@@ -1,3 +1,12 @@
+*******************************************************************************
+2.0.115
+
+Tue Mar 18 16:27:03 PST 2003  Duane Rettig  <duane@beta>
+
+	* makedist.cl: Fix directory deletion to work on nonexistent dir
+
+*******************************************************************************
+
 2002-08-14  Charles A. Cox  <cox@fritter>
 
   From acl6 branch (marked with "b> ").
@@ -101,4 +110,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.5 2002/08/14 19:55:55 cox Exp $
+$Id: ChangeLog,v 1.6 2003/03/19 00:30:53 duane Exp $
