@@ -1,6 +1,13 @@
+Tue Jul 09 17:28:32 2002  Charles A. Cox  <cox@FOX>
+
+  Joined acl6 branch to trunk and added new join tag: acl6_to_trunk_join2
+  Commands used:
+   cvs update -d -j acl6_to_trunk_join1 -j acl6 gtk (in trunk checkout)
+   cvs tag acl6_to_trunk_join2 gtk (in branch checkout)
+	
 Tue Jul 09 17:06:42 2002  Charles A. Cox  <cox@FOX>
 
-  From [branch] branch (marked with "b> ").
+  From acl62 branch (marked with "b> ").
   Join command used: cvs update -d -j acl62_branch_point -j acl62 gtk
 
 b> 2002-04-11  Charles A. Cox  <cox@fritter>
@@ -58,4 +65,4 @@ b> 	* notes/notes.txt:
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.6 2002/07/10 00:13:05 cox Exp $
+$Id: ChangeLog,v 1.2.2.7 2002/07/10 00:31:12 cox Exp $
