@@ -1,3 +1,7 @@
+2002-02-27  Kevin Layer  <layer@crikey>
+
+	* (NEW) Makefile (used by distribution building code)
+
 2002-02-26  Charles A. Cox  <cox@ultra>
 
   Decided to use a different strategy to handle ansi/modern mismatch.
@@ -18,4 +22,4 @@
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.2 2002/02/27 02:46:16 cox Exp $
+$Id: ChangeLog,v 1.2.2.3 2002/02/27 16:44:28 layer Exp $
