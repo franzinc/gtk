@@ -1,6 +1,35 @@
+2002-04-10  Charles A. Cox  <cox@fritter>
+
+  From acl6 branch (marked with "b> ").
+  Join command used: cvs update -d -j acl6_to_trunk_join0 -j acl6 gtk
+	
+b> 2002-03-14  Charles A. Cox  <cox@fritter>
+b> 
+b> 	* readme.txt: State that this doesn't work for gtk2.
+b> 	
+b> 2002-02-27  Kevin Layer  <layer@crikey>
+b> 
+b> 	* (NEW) Makefile (used by distribution building code)
+b> 
+b> 2002-02-26  Charles A. Cox  <cox@ultra>
+b> 
+b>   Decided to use a different strategy to handle ansi/modern mismatch.
+b> 	
+b> 	* cdbind.cl: pull recent changes for ansi/modern mismatch.
+b> 	* gtk.cl: warn at loadtime when casemode mismatch.  Define
+b> 	skip-in-ansi-mode macro.  Use for the three needed spots.
+b> 
+b> 2002-02-26  Charles A. Cox  <cox@fritter>
+b> 
+b> 	* cdbind.cl: Applied rfe5160 to gtk copy of this file.  Also,
+b> 	added :skip-in-ansi-mode to bind-c-function and bind-c-constant.
+b> 	* gtk.cl: Use :skip-in-ansi-mode for gtk_object_constructed,
+b> 	gtk_check_version, and G_CSET_a_2_z.
+b> 
+
 2002-02-20  Charles A. Cox  <cox@ultra>
 
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2 2002/02/20 20:54:10 cox Exp $
+$Id: ChangeLog,v 1.3 2002/04/10 23:56:38 cox Exp $

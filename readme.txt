@@ -2,7 +2,9 @@ Allegro CL GTK+ Interface.
 
 Introduction.
 
-The files in this directory define an Allegro CL interface to GTK+.
+The files in this directory define an Allegro CL interface to GTK+
+1.2.  GTK+ 2.0 is not supported by this release of the interface.
+
 This interface is not meant to be regarded as a Lisp language binding
 to GTK+.  Rather, it is a foreign function interface to the C binding
 of GTK+.  To use this interface, you should be familiar with both the

@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: cdbind.cl,v 1.1.1.1 2002/02/20 20:11:35 cox Exp $
+;; $Id: cdbind.cl,v 1.2 2002/04/10 23:56:38 cox Exp $
 
 (in-package :foreign-functions)
 
@@ -88,10 +88,12 @@
 (defmacro bind-c-export (id)
   ;; emitted only by macro defs in this file
   (when *export-foreign-symbols*
-    `(defpackage ,(package-name *package*) 
+    `(defpackage ,(intern (package-name *package*) (find-package :keyword)) 
        ;; defpackage seems to require this arg, otherwise it tries
        ;; to add common-lisp
-       (:use . ,(mapcar #'package-name (package-use-list *package*)))
+       (:use . ,(mapcar #'(lambda (x)
+			    (intern (package-name x) (find-package :keyword)))
+			(package-use-list *package*)))
        (:export ,id))))
 
 
