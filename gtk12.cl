@@ -15,7 +15,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: gtk12.cl,v 1.2 2002/07/10 00:27:22 cox Exp $
+;; $Id: gtk12.cl,v 1.3 2003/07/14 21:02:29 cox Exp $
 
 ;; This file is derived from the output of Allegro CL Lisp-to-C Binder
 ;; Version 1.6.1(1.6.1).  The original is at the bottom of this file
@@ -50,6 +50,7 @@ The current case mode does not match that used when compiling this file.  ~
 Continuing to load this file may result in inconsistent definitions.  ~
 Recompilation is recommended."))))
 
+#+removed
 (defmacro skip-in-ansi-mode (name type
 			     &body body)
   (if* (eq ':case-insensitive-upper
@@ -38423,6 +38424,7 @@ definition conflicts with another definition whose name differs only by case."
 		 else (list otype)))))))
 
 ;#define GTK_CHECK_VERSION(major, minor, micro) (GTK_MAJOR_VERSION > (major) || (GTK_MAJOR_VERSION == (major) && GTK_MINOR_VERSION > (minor)) || (GTK_MAJOR_VERSION == (major) && GTK_MINOR_VERSION == (minor) && GTK_MICRO_VERSION >= (micro)))
+#+removed
 (skip-in-ansi-mode
  GTK_CHECK_VERSION "macro"
  (ff:bind-c-export GTK_CHECK_VERSION)
@@ -38439,6 +38441,20 @@ definition conflicts with another definition whose name differs only by case."
 	    (and (= GTK_MAJOR_VERSION ,major-var)
 		 (= GTK_MINOR_VERSION ,minor-var)
 		 (> GTK_MICRO_VERSION ,micro-var)))))))
+(ff:bind-c-export GTK_CHECK_VERSION)
+(defmacro GTK_CHECK_VERSION (major minor micro)
+  (let ((major-var (gensym))
+	(minor-var (gensym))
+	(micro-var (gensym)))
+    `(let ((,major-var ,major)
+	   (,minor-var ,minor)
+	   (,micro-var ,micro))
+       (or (> GTK_MAJOR_VERSION ,major-var)
+	   (and (= GTK_MAJOR_VERSION ,major-var)
+		(> GTK_MINOR_VERSION ,minor-var))
+	   (and (= GTK_MAJOR_VERSION ,major-var)
+		(= GTK_MINOR_VERSION ,minor-var)
+		(> GTK_MICRO_VERSION ,micro-var))))))
 
 ;#define GTK_CLIST(obj) (GTK_CHECK_CAST ((obj), GTK_TYPE_CLIST, GtkCList)) 
 (ff:bind-c-export GTK_CLIST)
@@ -39667,11 +39683,16 @@ definition conflicts with another definition whose name differs only by case."
   `(not (eql (logand (GTK_OBJECT_FLAGS ,obj) GTK_CONNECTED) 0)))
 
 ;#define GTK_OBJECT_CONSTRUCTED(obj) ((GTK_OBJECT_FLAGS (obj) & GTK_CONSTRUCTED) != 0) 
+#+ignore
 (skip-in-ansi-mode
  GTK_OBJECT_CONSTRUCTED "macro"
  (ff:bind-c-export GTK_OBJECT_CONSTRUCTED)
  (defmacro GTK_OBJECT_CONSTRUCTED (obj)
    `(not (eql (logand (GTK_OBJECT_FLAGS ,obj) GTK_CONSTRUCTED) 0))))
+
+(ff:bind-c-export GTK_OBJECT_CONSTRUCTED)
+(defmacro GTK_OBJECT_CONSTRUCTED (obj)
+  `(not (eql (logand (GTK_OBJECT_FLAGS ,obj) GTK_CONSTRUCTED) 0)))
 
 ;#define GTK_OBJECT_DESTROYED(obj) ((GTK_OBJECT_FLAGS (obj) & GTK_DESTROYED) != 0) 
 (ff:bind-c-export GTK_OBJECT_DESTROYED)
@@ -40721,9 +40742,11 @@ definition conflicts with another definition whose name differs only by case."
 (ff:bind-c-constant G_CSET_LATINS
                     "\\337\\340\\341\\342\\343\\344\\345\\346\"	\"\\347\\350\\351\\352\\353\\354\\355\\356\\357\\360\"	\"\\361\\362\\363\\364\\365\\366\"	\"\\370\\371\\372\\373\\374\\375\\376\\377")     
 ;; #define G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz" 
+#+ignore
 (skip-in-ansi-mode
  G_CSET_a_2_z "constant"
  (ff:bind-c-constant G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz"))
+(ff:bind-c-constant G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz")
 ;; #define G_DATE_BAD_DAY 0U 
 (ff:bind-c-constant G_DATE_BAD_DAY 0)     ;; 0x0  
 ;; #define G_DATE_BAD_JULIAN 0U 

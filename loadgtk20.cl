@@ -15,7 +15,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.3 2002/08/14 19:55:55 cox Exp $
+;; $Id: loadgtk20.cl,v 1.4 2003/07/14 21:02:31 cox Exp $
 
 ;; Patched for bug12382
 
@@ -70,10 +70,11 @@ including the gtk library path.~:@>~%"))))
 	     (build-gtk-lib.so gtk-lib.so))))
 
        (load (compile-file-if-needed "cdbind.cl")) ; From cbind
+
        ;; bug12382
        ;; skip compiling since it doesn't work in Trial, and doesn't
        ;; currently buy much.
-       (load (#+ignore compile-file-if-needed identity "gtk20.cl"))
+       (load (compile-file-if-needed "gtk20.cl"))
        (load (compile-file-if-needed "eh.cl")))
 
      (build-gtk-lib.so (gtk-lib.so
