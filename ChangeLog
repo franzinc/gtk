@@ -1,6 +1,8 @@
 2003-01-21  Kevin Layer  <layer@crikey>
 
-	* makedist.cl: only delete directory and files if they exist
+	* makedist.cl: only delete directory and files if they
+	  exist--required because delete-directory-and-files keyword
+	  defaults changed
 
 2002-08-14  Charles A. Cox  <cox@fritter>
 
@@ -71,4 +73,4 @@ Tue Jul 09 17:14:39 2002  Charles A. Cox  <cox@FOX>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.4.2.5 2003/01/21 21:34:53 layer Exp $
+$Id: ChangeLog,v 1.2.2.4.2.6 2003/01/21 21:35:56 layer Exp $
