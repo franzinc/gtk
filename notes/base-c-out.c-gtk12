@@ -1,0 +1,22 @@
+
+/* 
+
+;; Allegro CL Lisp-to-C Binder Version 1.6.1(1.6.1).
+;; copyright (c) 1996-1998 Franz Inc, Berkeley, CA
+
+C Compiler switches:
+ -I/net/fritter/home/cox/gtk/spot/i/include/gtk-1.2 -I/net/fritter/home/cox/gtk/spot/i/include/glib-1.2 -I/net/fritter/home/cox/gtk/spot/i/lib/glib/include -I/usr/openwin/include 
+
+*/
+
+#include "/net/fritter/home/cox/gtk/spot/build/gtk+-1.2.10/examples/base/base.c"
+
+
+/* Wrapper function to return pointer to structure. */
+int  ACL_g_scanner_cur_value(  GScanner * scanner)
+{
+  int ptr = (int)malloc(sizeof(GTokenValue ));
+  *((GTokenValue *)ptr) = g_scanner_cur_value(scanner);
+  return(ptr);
+}
+

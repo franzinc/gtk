@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: cdbind.cl,v 1.2 2002/04/10 23:56:38 cox Exp $
+;; $Id: cdbind.cl,v 1.3 2002/07/10 00:27:21 cox Exp $
 
 (in-package :foreign-functions)
 
@@ -84,10 +84,20 @@
 
 (defvar *export-foreign-symbols* t)
 
+;; Some extensions to the built-in foreign types
+(def-foreign-type long-long (:struct (nil :long) (nil :long)))
+(def-foreign-type unsigned-long-long (:struct (nil :long) (nil :long)))
+(def-foreign-type long-double (:struct (nil :double) (nil :double)))
+(def-foreign-type function-pointer (* :void))
+(def-foreign-type dummy-forward-struct (:struct (nil (:array :int 1))))
+
 
 (defmacro bind-c-export (id)
   ;; emitted only by macro defs in this file
   (when *export-foreign-symbols*
+    `(eval-when (compile load eval)
+       (export ',id))
+    #+old
     `(defpackage ,(intern (package-name *package*) (find-package :keyword)) 
        ;; defpackage seems to require this arg, otherwise it tries
        ;; to add common-lisp
