@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.5.26.1 2004/09/02 22:34:14 cox Exp $
+;; $Id: loadgtk20.cl,v 1.5.26.1.10.1 2004/11/08 21:57:56 layer Exp $
 
 ;; Patched for bug12382
 
@@ -133,7 +133,8 @@ sed 's/-rdynamic//'`"
   (let ((*record-source-file-info* nil)
 	(*load-source-file-info* nil))
     (with-named-readtable (:gtk)
-      (do-load *load-pathname*))))
+      ;; bug14934
+      (do-load (translate-logical-pathname *load-pathname*)))))
 
 (with-named-readtable (:gtk)
   (format t "~&~@<;;; ~@;~
