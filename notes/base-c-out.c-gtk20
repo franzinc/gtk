@@ -1,0 +1,107 @@
+
+/* 
+
+;; Allegro CL Lisp-to-C Binder Version 1.6.3(1.6.3).
+;; copyright (c) 1996-1998 Franz Inc, Berkeley, CA
+
+C Compiler switches:
+  -I/net/fritter/home/cox/gtk2/fritter/i/include/gtk-2.0 -I/net/fritter/home/cox/gtk2/fritter/i/lib/gtk-2.0/include -I/net/fritter/home/cox/gtk2/fritter/i/include/atk-1.0 -I/net/fritter/home/cox/gtk2/fritter/i/include/pango-1.0 -I/usr/X11R6/include -I/net/fritter/home/cox/gtk2/fritter/i/include/glib-2.0 -I/net/fritter/home/cox/gtk2/fritter/i/lib/glib-2.0/include   
+
+*/
+
+#include "/net/fritter/home/cox/gtk2/fritter/build/gtk+-2.0.0/examples/base/base.c"
+
+
+/* Wrapper function to return pointer to structure. */
+void*  ACL_gethrtime( )
+{
+  void *ptr = (void*)malloc(sizeof(hrtime_t ));
+  *((hrtime_t *)ptr) = gethrtime();
+  return(ptr);
+}
+
+
+/* Wrapper function to return pointer to structure. */
+void*  ACL_gethrvtime( )
+{
+  void *ptr = (void*)malloc(sizeof(hrtime_t ));
+  *((hrtime_t *)ptr) = gethrvtime();
+  return(ptr);
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+GIOError  ACL_g_io_channel_seek(  GIOChannel * channel, gint64 * offset, GSeekType type)
+{
+  return(g_io_channel_seek(channel, *offset, type));
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+GIOStatus  ACL_g_io_channel_seek_position(  GIOChannel * channel, gint64 * offset, GSeekType type, GError * * error)
+{
+  return(g_io_channel_seek_position(channel, *offset, type, error));
+}
+
+
+/* Wrapper function to return pointer to structure. */
+void*  ACL_g_scanner_cur_value(  GScanner * scanner)
+{
+  void *ptr = (void*)malloc(sizeof(GTokenValue ));
+  *((GTokenValue *)ptr) = g_scanner_cur_value(scanner);
+  return(ptr);
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+GParamSpec *  ACL_g_param_spec_int64(  const gchar * name, const gchar * nick, const gchar * blurb, gint64 * minimum, gint64 * maximum, gint64 * default_value, GParamFlags flags)
+{
+  return(g_param_spec_int64(name, nick, blurb, *minimum, *maximum, *default_value, flags));
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+GParamSpec *  ACL_g_param_spec_uint64(  const gchar * name, const gchar * nick, const gchar * blurb, guint64 * minimum, guint64 * maximum, guint64 * default_value, GParamFlags flags)
+{
+  return(g_param_spec_uint64(name, nick, blurb, *minimum, *maximum, *default_value, flags));
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+void  ACL_g_value_set_int64(  GValue * value, gint64 * v_int64)
+{
+  g_value_set_int64(value, *v_int64);
+}
+
+
+/* Wrapper function to return pointer to structure. */
+void*  ACL_g_value_get_int64(  const GValue * value)
+{
+  void *ptr = (void*)malloc(sizeof(gint64 ));
+  *((gint64 *)ptr) = g_value_get_int64(value);
+  return(ptr);
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+void  ACL_g_value_set_uint64(  GValue * value, guint64 * v_uint64)
+{
+  g_value_set_uint64(value, *v_uint64);
+}
+
+
+/* Wrapper function to return pointer to structure. */
+void*  ACL_g_value_get_uint64(  const GValue * value)
+{
+  void *ptr = (void*)malloc(sizeof(guint64 ));
+  *((guint64 *)ptr) = g_value_get_uint64(value);
+  return(ptr);
+}
+
+
+/* Wrapper function to dereference pointers to structure arguments. */
+void  ACL_atk_object_notify_state_change(  AtkObject * accessible, AtkState * state, gboolean value)
+{
+  atk_object_notify_state_change(accessible, *state, value);
+}
+

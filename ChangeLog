@@ -1,3 +1,23 @@
+2002-04-11  Charles A. Cox  <cox@fritter>
+
+  Added support for GTK+ 2.0.  Rearranged files and directories to support
+  both GTK+ 1.2 and GTK+ 2.0.
+	
+	gtk.cl -> gtk12.cl and gtk20.cl.
+	load.cl -> loadgtk12.cl and loadgtk20.cl.
+	lispex/ -> lispex-gtk12/ and lispex-gtk20/.
+	notes/base-c-out.c -> notes/base-c-out.c-gtk12 and
+	notes/base-c-out.c-gtk20.
+	
+	* Makefile: enhance 'clean'.
+	* cdbind.cl: import stuff from old gtk.cl.
+	* eh.cl: Use XConnectionNumber(gdk_display) instead of
+	event_poll_fd, which only worked for gtk 1.2.
+	* makedist.cl: update.
+	* readme.txt: update.
+	* notes/gtk-build.txt: include gtk20 build experiences.
+	* notes/notes.txt: 
+
 2002-03-14  Charles A. Cox  <cox@fritter>
 
 	* readme.txt: State that this doesn't work for gtk2.
@@ -26,4 +46,4 @@
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.4 2002/03/14 21:55:16 cox Exp $
+$Id: ChangeLog,v 1.2.2.4.2.1 2002/04/12 00:17:35 cox Exp $

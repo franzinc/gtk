@@ -1,3 +1,5 @@
+=================== GTK 1.2 =================
+
 downloads are in download/
 building done in $host/build/
 installation in $INSTALL/
@@ -26,6 +28,110 @@ make install
 
 sed -e s%'$INSTALL'%$INSTALL% < $INSTALL/../../setup.template > $INSTALL/../setup
 chmod +x $INSTALL/../setup
+----------------------------------------------------------------------
+
+To use gtk,
+source /net/fritter/home/cox/gtk/`hostname`/setup
+
+=================== GTK 2.0 =================
+
+downloads are in download/
+building done in $host/build/
+installation in $INSTALL/
+
+need to use gnu make()? (failures occured on spot when not using gnu make.)
+
+----------------------------------------------------------------------
+set host=`hostname`
+set INSTALL=/net/fritter/home/cox/gtk2/$host/i
+
+mkdir `dirname $INSTALL`
+cd `dirname $INSTALL`
+
+sed -e s%'$INSTALL'%$INSTALL% < ../setup.template > ./setup
+chmod +x ./setup
+
+source ./setup
+
+mkdir build
+cd build
+bzip2 -d < ../../download/pkgconfig-0.12.0.tar.bz2 | tar xf -
+bzip2 -d < ../../download/glib-2.0.0.tar.bz2 | tar xf -
+bzip2 -d < ../../download/gtk+-2.0.0.tar.bz2 | tar xf -
+bzip2 -d < ../../download/atk-1.0.0.tar.bz2 | tar xf -
+bzip2 -d < ../../download/pango-1.0.0.tar.bz2 | tar xf -
+bzip2 -d < ../../download/libpng-1.2.1.tar.bz2 | tar xf -
+bzip2 -d < ../../download/zlib-1.1.4.tar.bz2 | tar xf -
+
+# following did not work since a subsequent configure doesn't like gettext
+# not being in /usr/lib/, /usr/include/, etc.
+#
+# # begin oxygen
+# bzip2 -d < ../../download/gettext-0.11.1.tar.bz2 | tar xf -
+# cd gettext-0.11.1
+# ./configure --prefix=$INSTALL
+# make
+# make install
+# cd ..
+# # end oxygen
+
+mv zlib-1.1.4 zlib
+mv libpng-1.2.1 libpng
+
+cd pkgconfig-0.12.0
+./configure --prefix=$INSTALL
+make
+make install
+cd ..
+
+cd glib-2.0.0
+./configure --prefix=$INSTALL
+make
+make install
+cd ..
+
+cd atk-1.0.0
+./configure --prefix=$INSTALL
+make
+make install
+cd ..
+
+cd pango-1.0.0
+./configure --prefix=$INSTALL
+make
+make install
+cd ..
+
+cd zlib
+./configure
+make
+su
+# installs files in /usr/local/lib and /usr/local/include
+make install
+exit
+make distclean
+./configure --prefix=$INSTALL
+make
+make install
+cd ..
+
+cd libpng
+cp scripts/makefile.std ./makefile
+make
+su
+# installs files in /usr/local/lib and /usr/local/include
+make install
+exit
+# assuming we don't have to rebuild.
+make prefix=$INSTALL install
+cd ..
+
+cd gtk+-2.0.0
+./configure --prefix=$INSTALL --without-libtiff --without-libjpeg --disable-xkb
+make
+make install
+cd ..
+
 ----------------------------------------------------------------------
 
 To use gtk,
