@@ -15,7 +15,9 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk12.cl,v 1.1.4.1 2002/07/10 00:13:08 cox Exp $
+;; $Id: loadgtk12.cl,v 1.1.4.2 2002/08/14 19:38:40 cox Exp $
+
+;; Patched for bug12382
 
 ;;
 ;; Allegro CL GTK+ Interface loader.
@@ -40,6 +42,12 @@
 
 (in-package :excl)
 
+(setf (named-readtable :gtk)
+  (copy-readtable nil))
+
+(when (eq *current-case-mode* :case-insensitive-upper)
+  (setf (readtable-case (named-readtable :gtk)) :invert))
+
 (labels
     ((do-load (*default-pathname-defaults*)
        (do ((gtk-lib.so (merge-pathnames "gtk12-lib.so"))
@@ -62,7 +70,33 @@ including the gtk library path.~:@>~%"))))
 	     (build-gtk-lib.so gtk-lib.so))))
 
        (load (compile-file-if-needed "cdbind.cl")) ; From cbind
-       (load (compile-file-if-needed "gtk12.cl"))
+       ;; spr26502
+       ;; too much to compile this in trial release
+       (if* (featurep :allegro-cl-trial)
+	  then (note t "~
+Interface being loaded uncompiled for Allegro CL Trial Release")
+	       ;; Copied from gtk12.cl, which has it only in eval-when compile
+	       ;; environment.
+	       (let ((.symbol-types. (make-hash-table)))
+		 (def-fwrapper bind-c-type-symbol-types-wrapper (&rest args)
+		   (destructuring-bind ((macrof-name id &rest def)
+					&rest macrof-args)
+		       args
+		     (declare (ignore macrof-name macrof-args))
+		     (let ((result (list (call-next-fwrapper))))
+		       (when (and (null (cdr def))
+				  (symbolp (car def)))
+			 (pushnew id (gethash (car def) .symbol-types.)))
+		       (dolist (prev-def (gethash id .symbol-types.))
+			 (push `(ff::bind-c-type ,prev-def ,id) result))
+		       (cons 'progn (nreverse result)))))
+
+		 (fwrap 'ff::bind-c-typedef :bind-c-type-symbol-types-wrapper
+			'bind-c-type-symbol-types-wrapper)
+		 (fwrap 'ff::bind-c-type :bind-c-type-symbol-types-wrapper
+			'bind-c-type-symbol-types-wrapper))
+	       (load "gtk12.cl")
+	  else (load (compile-file-if-needed "gtk12.cl")))
        (load (compile-file-if-needed "eh.cl")))
 
      (build-gtk-lib.so (gtk-lib.so)
@@ -113,4 +147,25 @@ sed 's/-rdynamic//'`"
 
   (let ((*record-source-file-info* nil)
 	(*load-source-file-info* nil))
-    (do-load *load-pathname*)))
+    (with-named-readtable (:gtk)
+      (do-load *load-pathname*))))
+
+(with-named-readtable (:gtk)
+  (format t "~&~@<;;; ~@;~
+GTK+ Interface loaded. ~2%~
+Note:  ~
+When loading, using compile-file, or otherwise using the Lisp reader to read ~
+Lisp ~
+expressions that access the GTK+ interface, the appropriate ~
+readtable-case should be used.  ~
+In Modern mode, use :preserve (the default standard readtable-case ~
+setting for Modern mode).  ~
+In ANSI mode, use :invert.  ~2%~
+The :gtk named-readtable, which has the appropriate readtable-case setting
+for the current mode, ~
+is provided for convenience and portability.~2%~
+Example: ~s~2%~
+The with-named-readtable macro can also be used.
+~:@>"
+	  '(let ((*readtable* (named-readtable :gtk)))
+	    (load (compile-file "lispex-gtk12/02.01-helloworld.cl")))))
