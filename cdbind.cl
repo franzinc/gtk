@@ -1,6 +1,7 @@
 ; -*- mode: common-lisp; package: foreign-functions -*-
 ;;
-;; copyright (c) 1996-2000 Franz Inc, Berkeley, CA
+;; copyright (c) 1996-2000 Franz Inc, Berkeley, CA  - All rights reserved.
+;; copyright (c) 2000-2004 Franz Inc, Oakland, CA - All rights reserved.
 ;;
 ;; The software, data and information contained herein are proprietary
 ;; to, and comprise valuable trade secrets of, Franz, Inc.  They are
@@ -16,7 +17,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: cdbind.cl,v 1.4 2003/12/31 17:50:58 cox Exp $
+;; $Id: cdbind.cl,v 1.5 2004/01/16 19:24:53 layer Exp $
 
 (in-package :foreign-functions)
 

@@ -1,5 +1,6 @@
 ;;
-;; copyright (c) 1996-2000 Franz Inc, Berkeley, CA
+;; copyright (c) 1996-2000 Franz Inc, Berkeley, CA  - All rights reserved.
+;; copyright (c) 2000-2004 Franz Inc, Oakland, CA - All rights reserved.
 ;;
 ;; The software, data and information contained herein are proprietary
 ;; to, and comprise valuable trade secrets of, Franz, Inc.  They are
@@ -15,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: gtk12.cl,v 1.3 2003/07/14 21:02:29 cox Exp $
+;; $Id: gtk12.cl,v 1.4 2004/01/16 19:24:53 layer Exp $
 
 ;; This file is derived from the output of Allegro CL Lisp-to-C Binder
 ;; Version 1.6.1(1.6.1).  The original is at the bottom of this file
@@ -41394,7 +41395,8 @@ definition conflicts with another definition whose name differs only by case."
 ;; --- Begin Original --
 ;
 ;;; Allegro CL Lisp-to-C Binder Version 1.6.1(1.6.1).
-;;; copyright (c) 1996-1998 Franz Inc, Berkeley, CA
+;;; copyright (c) 1996-1998 Franz Inc, Berkeley, CA  - All rights reserved.
+;; copyright (c) 1998-2004 Franz Inc, Oakland, CA - All rights reserved.
 ;
 ;;; Include list: 
 ;;; Exclude list: 
