@@ -1,3 +1,10 @@
+2002-04-10  Charles A. Cox  <cox@fritter>
+
+  Joined acl6 branch to trunk and added new join tag: acl6_to_trunk_join1
+  Commands used:
+   cvs update -d -j acl6_to_trunk_join0 -j acl6 gtk (in trunk checkout)
+   cvs tag acl6_to_trunk_join1 gtk (in branch checkout)
+
 2002-03-14  Charles A. Cox  <cox@fritter>
 
 	* readme.txt: State that this doesn't work for gtk2.
@@ -26,4 +33,4 @@
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.4 2002/03/14 21:55:16 cox Exp $
+$Id: ChangeLog,v 1.2.2.5 2002/04/10 23:59:37 cox Exp $
