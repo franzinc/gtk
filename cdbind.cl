@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: cdbind.cl,v 1.1.1.1.2.1 2002/02/26 22:23:04 cox Exp $
+;; $Id: cdbind.cl,v 1.1.1.1.2.2 2002/02/27 02:46:16 cox Exp $
 
 (in-package :foreign-functions)
 
@@ -97,23 +97,11 @@
        (:export ,id))))
 
 
-(defmacro bind-c-constant  (id val
-			    &key skip-in-ansi-mode)
+(defmacro bind-c-constant  (id val)
   ;; emitted in cmnbind by decode-push-defconstant, decode-gen-defconstant
-  (if* (and skip-in-ansi-mode
-	    (eq :case-insensitive-upper
-		*current-case-mode*))
-     then (warn #1="~
-The bind-c-constant definition for ~s is being skipped in ANSI mode because ~
-the ~s setting is true.  Most likely, someone included this setting because ~
-this definition conflicts with another definition whose name differs only ~
-by case."
-		id ':skip-in-ansi-mode)
-	  `(warn #1# ',id ':skip-in-ansi-mode)
-     else
-	  `(progn
-	     (bind-c-export ,id)
-	     (defparameter ,id ,val))))
+  `(progn
+     (bind-c-export ,id)
+     (defparameter ,id ,val)))
 
 (defmacro bind-c-alternate (id &rest def)
   ;; emitted by bind-c-function
@@ -184,48 +172,36 @@ by case."
 					 arguments
 					 ;; call-style
 					 (strings-convert 
-					  t strings-convert-p)
-					 skip-in-ansi-mode
+					  t strings-convert-p)	  
 			   &allow-other-keys)
-  (if* (and skip-in-ansi-mode
-	    (eq :case-insensitive-upper
-		*current-case-mode*))
-     then (warn #1="~
-The bind-c-function definition for ~s is being skipped in ANSI mode because ~
-the ~s setting is true.  Most likely, someone included this setting because ~
-this definition conflicts with another definition whose name differs only ~
-by case."
-		id ':skip-in-ansi-mode)
-	  `(warn #1# ',id ':skip-in-ansi-mode)
-     else
-	  ;; emitted by
-	  ;; cmnbind: decode-push-defforeign
-	  (setf id (if all-names (caar all-names) id))
-	  `(progn
-	     (bind-c-export ,id)
-	     (def-foreign-call
-		 (,id ,unconverted-entry-name)
-		 ,(mapcar #'(lambda (name type) (list (intern name) type))
-			  c-arg-names arguments)
-	       :returning ,(if (consp return-type)
-			       (list return-type)
-			     return-type)
-	       ;; :convention ???
-	       :callback t
-	       :call-direct nil
-	       :arg-checking t
-	       ,@(when strings-convert-p
-		   `(:strings-convert ,strings-convert))
-	       )
+  ;; emitted by
+  ;; cmnbind: decode-push-defforeign
+  (setf id (if all-names (caar all-names) id))
+  `(progn
+     (bind-c-export ,id)
+     (def-foreign-call
+	       (,id ,unconverted-entry-name)
+	       ,(mapcar #'(lambda (name type) (list (intern name) type))
+			c-arg-names arguments)
+	     :returning ,(if (consp return-type)
+			     (list return-type)
+			   return-type)
+	     ;; :convention ???
+	     :callback t
+	     :call-direct nil
+	     :arg-checking t
+	     ,@(when strings-convert-p
+		 `(:strings-convert ,strings-convert))
+	     )
      
-	     ,@(mapcan
-		#'(lambda (x)
-		    (unless (eq id (car x))
-		      (list
-		       (list 'bind-c-alternate (car x) '(&rest args)
-			     (list 'list* (list 'quote id) 'args))
-		       )))
-		all-names)
-	     )))
+     ,@(mapcan
+	#'(lambda (x)
+	    (unless (eq id (car x))
+	      (list
+	       (list 'bind-c-alternate (car x) '(&rest args)
+		     (list 'list* (list 'quote id) 'args))
+	       )))
+	all-names)
+     ))
 
 

@@ -1,3 +1,11 @@
+2002-02-26  Charles A. Cox  <cox@ultra>
+
+  Decided to use a different strategy to handle ansi/modern mismatch.
+	
+	* cdbind.cl: pull recent changes for ansi/modern mismatch.
+	* gtk.cl: warn at loadtime when casemode mismatch.  Define
+	skip-in-ansi-mode macro.  Use for the three needed spots.
+
 2002-02-26  Charles A. Cox  <cox@fritter>
 
 	* cdbind.cl: Applied rfe5160 to gtk copy of this file.  Also,
@@ -10,4 +18,4 @@
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.1 2002/02/26 22:23:03 cox Exp $
+$Id: ChangeLog,v 1.2.2.2 2002/02/27 02:46:16 cox Exp $
