@@ -15,7 +15,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: eh.cl,v 1.2 2002/07/10 00:27:21 cox Exp $
+;; $Id: eh.cl,v 1.3 2002/08/14 19:55:55 cox Exp $
 
 ;; Extensions to Lisp gtk+ interface which allow multi-processing integration.
 ;;
@@ -42,7 +42,8 @@
 (defun gtk-events-pending ()
   (not (eq gtk:NULL (gtk:gtk_events_pending))))
 
-(ff:def-foreign-call XConnectionNumber ((x (* :void)))
+;; fixed for bug12382
+(ff:def-foreign-call (XConnectionNumber "XConnectionNumber") ((x (* :void)))
   :returning :int)
 
 (let ((.gtk-main-counter. 0)

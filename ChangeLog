@@ -1,3 +1,35 @@
+2002-08-14  Charles A. Cox  <cox@fritter>
+
+  From acl6 branch (marked with "b> ").
+  Join command used: cvs update -d -j acl6_to_trunk_join2 -j acl6 gtk
+
+b> 2002-08-14  Charles A. Cox  <cox@fritter>
+b> 
+b>   From acl62 branch (marked with "b> ").
+b>   Join command used: cvs update -d -j acl62_to_acl6_join1 -j acl62 gtk
+b> 
+b> b> 2002-08-14  Charles A. Cox  <cox@fritter>
+b> b> 
+b> b> 	bug12382 fix:
+b> b> 	* eh.cl: Fix def-foreign-call for ANSI mode.
+b> b> 	* loadgtk12.cl: Fix for ANSI mode.  Load uncompiled in Trial.
+b> b> 	* loadgtk20.cl: Fix for ANSI mode.  Load uncompiled always.
+b> b> 
+b> b> Tue Jul 09 17:14:39 2002  Charles A. Cox  <cox@FOX>
+b> b> 
+b> b>   Joined [branch] branch to trunk and added new join tag: acl62_to_acl6_join1
+b> b>   Commands used:
+b> b>    cvs update -d -j acl62_branch_point -j acl62 gtk (in trunk checkout)
+b> b>    cvs tag acl62_to_acl6_join1 gtk (in branch checkout)
+b> 	
+b> Tue Jul 09 17:28:32 2002  Charles A. Cox  <cox@FOX>
+b> 
+b>   Joined acl6 branch to trunk and added new join tag: acl6_to_trunk_join2
+b>   Commands used:
+b>    cvs update -d -j acl6_to_trunk_join1 -j acl6 gtk (in trunk checkout)
+b>    cvs tag acl6_to_trunk_join2 gtk (in branch checkout)
+
+	
 Tue Jul 09 17:21:57 2002  Charles A. Cox  <cox@FOX>
 
   From acl6 branch (marked with "b> ").
@@ -69,4 +101,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.4 2002/07/10 00:27:21 cox Exp $
+$Id: ChangeLog,v 1.5 2002/08/14 19:55:55 cox Exp $
