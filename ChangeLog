@@ -1,3 +1,11 @@
+2003-05-13  Charles A. Cox  <cox@fritter>
+
+  Joined acl62 branch to acl6 and added new join tag: acl62_to_acl6_join3
+  Commands used:
+   cvs update -d -j acl62_to_acl6_join2 -j acl62 gtk (in trunk checkout)
+   cvs tag acl62_to_acl6_join3 gtk (in branch checkout)
+
+
 2003-01-21  Kevin Layer  <layer@crikey>
 
 	* makedist.cl: only delete directory and files if they
@@ -73,4 +81,4 @@ Tue Jul 09 17:14:39 2002  Charles A. Cox  <cox@FOX>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.4.2.6 2003/01/21 21:35:56 layer Exp $
+$Id: ChangeLog,v 1.2.2.4.2.7 2003/05/13 20:28:12 cox Exp $
