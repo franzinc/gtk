@@ -1,5 +1,5 @@
+
 *******************************************************************************
-2.0.115
 
 Tue Mar 18 16:27:03 PST 2003  Duane Rettig  <duane@beta>
 
@@ -110,4 +110,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.6 2003/03/19 00:30:53 duane Exp $
+$Id: ChangeLog,v 1.7 2003/03/19 00:35:57 duane Exp $
