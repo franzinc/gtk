@@ -2,7 +2,8 @@
 
 (flet ((makedist (*default-pathname-defaults*
 		  &aux (gtk-dist (merge-pathnames #p"gtk-dist/")))
-	 (delete-directory-and-files gtk-dist)
+	 (when (probe-file gtk-dist)
+	   (delete-directory-and-files gtk-dist))
 	 
 	 (dolist (file '(
 			 #p"cdbind.cl"
