@@ -1,3 +1,7 @@
+2003-12-31  Charles A. Cox  <cox@gemini>
+
+	* cdbind.cl: bug13705 fix.
+
 2003-07-14  Charles A. Cox  <cox@fritter>
 
 	* gtk12.cl, gtk20.cl: no longer using skip-in-ansi-mode.  Add
@@ -153,4 +157,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.10 2003/07/14 21:02:29 cox Exp $
+$Id: ChangeLog,v 1.11 2003/12/31 17:50:58 cox Exp $

@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: cdbind.cl,v 1.3 2002/07/10 00:27:21 cox Exp $
+;; $Id: cdbind.cl,v 1.4 2003/12/31 17:50:58 cox Exp $
 
 (in-package :foreign-functions)
 
@@ -77,6 +77,7 @@
 		  #:function-pointer
 		  
 		  )
+	    #+remove			; bug13705
 	    (:import-from         ;; <25>
 	     :excl
 	     #:ce-get)
