@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.5 2004/01/16 19:24:56 layer Exp $
+;; $Id: loadgtk20.cl,v 1.5.26.1 2004/09/02 22:34:14 cox Exp $
 
 ;; Patched for bug12382
 
@@ -90,7 +90,7 @@ including the gtk library path.~:@>~%"))))
 	    (cmd nil))
 	   (gtk-lib.so-built)		; end restart loop if success
 	 (setq cmd (format nil "~
-env LD_LIBRARY_PATH=~a ld ~a -o ~a ~
+env LD_LIBRARY_PATH=~a cc ~a -o ~a ~
 `\"~a~a\" --libs ~a | ~
 sed 's/-rdynamic//'`"
 			   (sys:getenv "LD_LIBRARY_PATH")
