@@ -1,0 +1,32 @@
+downloads are in download/
+building done in $host/build/
+installation in $INSTALL/
+----------------------------------------------------------------------
+set host=`hostname`
+set INSTALL=/net/fritter/home/cox/gtk/$host/i
+
+mkdir `dirname $INSTALL`
+cd `dirname $INSTALL`
+
+mkdir build
+cd build
+gunzip < ../../download/gl* | tar xf -
+gunzip < ../../download/gt* | tar xf -
+
+cd glib-1.2.10
+./configure --prefix=$INSTALL
+make
+make install
+
+cd ../gtk+-1.2.10
+setenv LD_LIBRARY_PATH $INSTALL/lib:${LD_LIBRARY_PATH}
+env GLIB_CONFIG=$INSTALL/bin/glib-config ./configure --prefix=$INSTALL
+make
+make install
+
+sed -e s%'$INSTALL'%$INSTALL% < $INSTALL/../../setup.template > $INSTALL/../setup
+chmod +x $INSTALL/../setup
+----------------------------------------------------------------------
+
+To use gtk,
+source /net/fritter/home/cox/gtk/`hostname`/setup

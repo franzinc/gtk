@@ -1,0 +1,51 @@
+cbind only has binaries for win, sgi, and sun.  Therefore, using cbind
+to generate on spot.
+
+On spot:
+
+Set LD_LIBRARY_PATH and path as in gtk-build.txt for spot.
+
+Copy 6.0 cbind to spot.  Update cbind/loadcb.cl pathnames.
+
+ (load "/acl2/cox/cbind/loadcb.cl")
+ (defpackage :gtk (:use common-lisp)) 
+
+ (ff:build-c-binding
+  "/net/fritter/home/cox/gtk/spot/build/gtk+-1.2.10/examples/base/base.c"
+  ;; c-args is 'gtk-config --cflags' output
+  :c-args "-I/net/fritter/home/cox/gtk/spot/i/include/gtk-1.2 -I/net/fritter/home/cox/gtk/spot/i/include/glib-1.2 -I/net/fritter/home/cox/gtk/spot/i/lib/glib/include -I/usr/openwin/include"
+  :lisp-out "/net/fritter/home/cox/gtk/base-lisp-out.cl"
+  :c-out "/net/fritter/home/cox/gtk/base-c-out.c"
+  :package (find-package :gtk))
+
+Building gtk.so:
+
+Set LD_LIBRARY_PATH and path as in gtk-build.txt for spot.
+ 
+ [spot]% ld -G -o /net/fritter/home/cox/gtk/spot/gtk.so `gtk-config --libs`
+
+ [fritter]% ld -shared -o /net/fritter/home/cox/gtk/fritter/gtk.so \
+            `gtk-config --libs | sed -e 's/-rdynamic//'`
+
+  At one point, on fritter, I had to remove -ldl and -lm in order to load
+  resulting gtk.so into lisp.  I never knew why -- maybe a 6.0 thing?
+  [fritter]% ld -shared -o /net/fritter/home/cox/gtk/fritter/gtk.so \
+             `gtk-config --libs | sed -e 's/-rdynamic//' -e 's/-lm//' -e 's/-ldl//'`
+
+To load in fresh lisp,
+
+ (load "/net/fritter/home/cox/gtk/HOST/gtk.so")
+
+ (load (compile-file-if-needed "/net/fritter/home/cox/gtk/gtk.cl"))
+
+ (load (compile-file-if-needed "/net/fritter/home/cox/gtk/eh.cl"))
+
+
+Examples in /net/fritter/home/cox/gtk/lispex/*.cl.  While developing
+examples, I used the gtk api gtk_main.  I later came up with the more
+mp-friendly gtk:gtk-main defined in eh.cl.  At this time, most
+examples do not use the newer gtk:gtk-main, but it should be a simple
+matter to substitute:
+
+ gtk:gtk_main -> gtk:gtk-main
+ gtk:gtk_main_quit -> gtk:gtk-main-quit
