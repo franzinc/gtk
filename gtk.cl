@@ -15,7 +15,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: gtk.cl,v 1.1.1.1 2002/02/20 20:11:39 cox Exp $
+;; $Id: gtk.cl,v 1.1.1.1.2.1 2002/02/26 22:23:04 cox Exp $
 
 ;; This file is derived from the output of Allegro CL Lisp-to-C Binder
 ;; Version 1.6.1(1.6.1).  The original is at the bottom of this file
@@ -14835,6 +14835,7 @@
      :c-arg-names (object)
      :arguments ((* GtkObject))
      :strings-convert t
+     :skip-in-ansi-mode t
      )
 
 ;; /net/fritter/home/cox/gtk/spot/i/include/gtk-1.2/gtk/gtkobject.h:227 <1238> 
@@ -26072,6 +26073,7 @@
      :c-arg-names (required_major required_minor required_micro)
      :arguments (guint guint guint)
      :strings-convert t
+     :skip-in-ansi-mode t
      )
 
 ;; /net/fritter/home/cox/gtk/spot/i/include/gtk-1.2/gtk/gtkmain.h:71 <2047> 
@@ -40698,7 +40700,8 @@
 (ff:bind-c-constant G_CSET_LATINS
                     "\\337\\340\\341\\342\\343\\344\\345\\346\"	\"\\347\\350\\351\\352\\353\\354\\355\\356\\357\\360\"	\"\\361\\362\\363\\364\\365\\366\"	\"\\370\\371\\372\\373\\374\\375\\376\\377")     
 ;; #define G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz" 
-(ff:bind-c-constant G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz")     
+(ff:bind-c-constant G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz"
+		    :skip-in-ansi-mode t)     
 ;; #define G_DATE_BAD_DAY 0U 
 (ff:bind-c-constant G_DATE_BAD_DAY 0)     ;; 0x0  
 ;; #define G_DATE_BAD_JULIAN 0U 

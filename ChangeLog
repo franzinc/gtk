@@ -1,6 +1,13 @@
+2002-02-26  Charles A. Cox  <cox@fritter>
+
+	* cdbind.cl: Applied rfe5160 to gtk copy of this file.  Also,
+	added :skip-in-ansi-mode to bind-c-function and bind-c-constant.
+	* gtk.cl: Use :skip-in-ansi-mode for gtk_object_constructed,
+	gtk_check_version, and G_CSET_a_2_z.
+
 2002-02-20  Charles A. Cox  <cox@ultra>
 
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2 2002/02/20 20:54:10 cox Exp $
+$Id: ChangeLog,v 1.2.2.1 2002/02/26 22:23:03 cox Exp $
