@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1.2.1 2002/02/27 16:43:58 layer Exp $
+# $Id: Makefile,v 1.1.2.2 2002/07/10 00:13:05 cox Exp $
 
 SHELL = sh
 
@@ -11,6 +11,8 @@ all:	clean
 	sh $(runlisp_sh) -f build.tmp $(lisp) -qq
 
 clean: FORCE
-	rm -fr gtk-dist
+	-find . -name '*.fasl' -print | xargs rm
+	-find . -name '*.so' -print | xargs rm
+	-rm -fr gtk-dist
 
 FORCE:
