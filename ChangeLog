@@ -1,3 +1,10 @@
+Tue Jul 09 17:14:39 2002  Charles A. Cox  <cox@FOX>
+
+  Joined [branch] branch to trunk and added new join tag: acl62_to_acl6_join1
+  Commands used:
+   cvs update -d -j acl62_branch_point -j acl62 gtk (in trunk checkout)
+   cvs tag acl62_to_acl6_join1 gtk (in branch checkout)
+
 2002-04-11  Charles A. Cox  <cox@fritter>
 
   Added support for GTK+ 2.0.  Rearranged files and directories to support
@@ -46,4 +53,4 @@
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.2.2.4.2.1 2002/04/12 00:17:35 cox Exp $
+$Id: ChangeLog,v 1.2.2.4.2.2 2002/07/10 00:16:30 cox Exp $
