@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.5.26.1 2004/09/02 22:34:14 cox Exp $
+;; $Id: loadgtk20.cl,v 1.5.26.2 2005/04/11 21:57:00 cox Exp $
 
 ;; Patched for bug12382
 
@@ -46,6 +46,7 @@
 (setf (named-readtable :gtk)
   (copy-readtable nil))
 
+#+remove				; bug15263
 (when (eq *current-case-mode* :case-insensitive-upper)
   (setf (readtable-case (named-readtable :gtk)) :invert))
 
@@ -75,7 +76,7 @@ including the gtk library path.~:@>~%"))))
        ;; bug12382
        ;; skip compiling since it doesn't work in Trial, and doesn't
        ;; currently buy much.
-       (load (compile-file-if-needed "gtk20.cl"))
+       (load (#+no compile-file-if-needed identity "gtk20.cl"))
        (load (compile-file-if-needed "eh.cl")))
 
      (build-gtk-lib.so (gtk-lib.so
@@ -133,8 +134,10 @@ sed 's/-rdynamic//'`"
   (let ((*record-source-file-info* nil)
 	(*load-source-file-info* nil))
     (with-named-readtable (:gtk)
-      (do-load *load-pathname*))))
+      ;; bug14934
+      (do-load (translate-logical-pathname *load-pathname*)))))
 
+#+remove				; bug15263
 (with-named-readtable (:gtk)
   (format t "~&~@<;;; ~@;~
 GTK+ Interface loaded. ~2%~
