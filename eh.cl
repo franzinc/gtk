@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: eh.cl,v 1.4 2004/01/16 19:24:53 layer Exp $
+;; $Id: eh.cl,v 1.4.26.1 2005/06/10 16:21:25 duane Exp $
 
 ;; Extensions to Lisp gtk+ interface which allow multi-processing integration.
 ;;
@@ -31,7 +31,11 @@
 ;; gtk:gtk-timeout values are nil, meaning no timeout, or n, where timeout
 ;; occurs every (/ n 1000) seconds.
 
+#+use-in-case-mode
+(excl::in-case-mode :ww)
+
 (defpackage :gtk
+  #+use-in-case-mode (:mode :independent)
   (:use :common-lisp)
   (:export #:gtk-events-pending
 	   #:gtk-main

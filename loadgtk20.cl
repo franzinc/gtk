@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.5.26.3 2005/04/11 22:31:34 cox Exp $
+;; $Id: loadgtk20.cl,v 1.5.26.4 2005/06/10 16:21:28 duane Exp $
 
 ;; Patched for bug12382
 
@@ -43,6 +43,7 @@
 
 (in-package :excl)
 
+#-use-in-case-mode
 (setf (named-readtable :gtk)
   (copy-readtable nil))
 
@@ -72,11 +73,11 @@ including the gtk library path.~:@>~%"))))
 	     (build-gtk-lib.so gtk-lib.so))))
 
        (load (compile-file-if-needed "cdbind.cl")) ; From cbind
-
        ;; bug12382
        ;; skip compiling since it doesn't work in Trial, and doesn't
        ;; currently buy much.
-       (load (compile-file-if-needed "gtk20.cl"))
+       (let ((comp::*fasl-hash-size* 500000))
+	 (load (compile-file-if-needed #+ignore identity "gtk20.cl")))
        (load (compile-file-if-needed "eh.cl")))
 
      (build-gtk-lib.so (gtk-lib.so
@@ -91,7 +92,7 @@ including the gtk library path.~:@>~%"))))
 	    (cmd nil))
 	   (gtk-lib.so-built)		; end restart loop if success
 	 (setq cmd (format nil "~
-env LD_LIBRARY_PATH=~a cc ~a -o ~a ~
+env LD_LIBRARY_PATH=~a ld ~a -o ~a ~
 `\"~a~a\" --libs ~a | ~
 sed 's/-rdynamic//'`"
 			   (sys:getenv "LD_LIBRARY_PATH")
@@ -133,9 +134,12 @@ sed 's/-rdynamic//'`"
 
   (let ((*record-source-file-info* nil)
 	(*load-source-file-info* nil))
+    #-use-in-case-mode
     (with-named-readtable (:gtk)
       ;; bug14934
-      (do-load (translate-logical-pathname *load-pathname*)))))
+      (do-load (translate-logical-pathname *load-pathname*)))
+    #+use-in-case-mode
+    (do-load (translate-logical-pathname *load-pathname*))))
 
 #+remove				; bug15263
 (with-named-readtable (:gtk)
