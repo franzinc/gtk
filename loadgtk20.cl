@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.5.26.4 2005/06/10 16:21:28 duane Exp $
+;; $Id: loadgtk20.cl,v 1.5.26.5 2005/07/20 19:38:49 layer Exp $
 
 ;; Patched for bug12382
 
