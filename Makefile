@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2002/07/10 00:27:21 cox Exp $
+# $Id: Makefile,v 1.4 2005/08/03 05:07:56 layer Exp $
 
 SHELL = sh
 
@@ -13,6 +13,6 @@ all:	clean
 clean: FORCE
 	-find . -name '*.fasl' -print | xargs rm
 	-find . -name '*.so' -print | xargs rm
-	-rm -fr gtk-dist
+	-rm -fr gtk-dist build.tmp
 
 FORCE:
