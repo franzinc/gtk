@@ -1,3 +1,7 @@
+2005-09-28  Kevin Layer  <layer@gemini>
+
+	* Makefile: rm -f so "make clean" does fail if run twice
+
 2005-09-15  Kevin Layer  <layer@gemini>
 
 	* loadgtk20.cl: bug15544: from cox
@@ -198,4 +202,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.13 2005/09/15 21:08:02 layer Exp $
+$Id: ChangeLog,v 1.14 2005/09/28 21:45:13 layer Exp $
