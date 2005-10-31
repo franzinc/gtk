@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.7 2005/09/15 21:08:02 layer Exp $
+;; $Id: loadgtk20.cl,v 1.7.4.1 2005/10/31 21:37:14 layer Exp $
 
 ;; Patched for bug12382
 
@@ -53,7 +53,7 @@
 
 (labels
     ((do-load (*default-pathname-defaults*)
-       (do ((gtk-lib.so (merge-pathnames "gtk20-lib.so"))
+       (do ((gtk-lib.so (merge-pathnames "gtk:gtk20-lib.so"))
 	    (gtk-lib.so-loaded nil))
 	   (gtk-lib.so-loaded)		; end restart loop if success
 	 (unless (probe-file gtk-lib.so)

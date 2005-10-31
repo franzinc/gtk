@@ -1,3 +1,9 @@
+2005-10-31  Kevin Layer  <layer@gemini>
+
+	* loadgtk20.cl: use the new logical host `gtk' for the location
+	  from which to load gtk20-lib.so.  This is defined differently
+	  and correctl for development and users.
+
 2005-09-28  Kevin Layer  <layer@gemini>
 
 	* Makefile: rm -f so "make clean" does fail if run twice
@@ -202,4 +208,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.14 2005/09/28 21:45:13 layer Exp $
+$Id: ChangeLog,v 1.14.2.1 2005/10/31 21:37:14 layer Exp $
