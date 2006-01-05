@@ -1,3 +1,7 @@
+*******************************************************************************
+post-8.0 release changes:
+
+*******************************************************************************
 2005-10-31  Kevin Layer  <layer@gemini>
 
 	* loadgtk20.cl: use the new logical host `gtk' for the location
@@ -208,4 +212,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.15 2005/11/07 18:05:24 layer Exp $
+$Id: ChangeLog,v 1.16 2006/01/05 21:40:37 layer Exp $
