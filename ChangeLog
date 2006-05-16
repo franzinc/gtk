@@ -1,6 +1,11 @@
 *******************************************************************************
 post-8.0 release changes:
 
+2006-05-16  Kevin Layer  <layer@gemini>
+
+	* loadgtk20.cl: bug16221: preserve logical pathname for .so so
+	  image portability is possible
+
 *******************************************************************************
 2005-10-31  Kevin Layer  <layer@gemini>
 
@@ -212,4 +217,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.15.4.1 2006/01/05 21:23:56 layer Exp $
+$Id: ChangeLog,v 1.15.4.2 2006/05/16 20:30:34 layer Exp $
