@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.8.4.1 2006/05/16 20:30:34 layer Exp $
+;; $Id: loadgtk20.cl,v 1.8.4.2 2006/05/22 22:05:09 layer Exp $
 
 ;; Patched for bug12382
 
@@ -89,6 +89,7 @@ including the gtk library path.~:@>~%"))))
        ;; 
        (do ((gtk-lib.so-built nil)
 	    (pkg-config-path "")
+	    (gtk-lib.so (translate-logical-pathname gtk-lib.so))
 	    (cmd nil))
 	   (gtk-lib.so-built)		; end restart loop if success
 	 (setq cmd (format nil "~
