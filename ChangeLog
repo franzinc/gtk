@@ -1,5 +1,20 @@
 *******************************************************************************
+join from acl8 to trunk, changes from
+	2006-05-22  Kevin Layer  <layer@gemini>
+    to
+	2006-05-16  Kevin Layer  <layer@gemini>
+
+*******************************************************************************
 post-8.0 release changes:
+
+2006-05-22  Kevin Layer  <layer@gemini>
+
+	* loadgtk20.cl: bug16221: 2nd part of previous fix
+
+2006-05-16  Kevin Layer  <layer@gemini>
+
+	* loadgtk20.cl: bug16221: preserve logical pathname for .so so
+	  image portability is possible
 
 *******************************************************************************
 2005-10-31  Kevin Layer  <layer@gemini>
@@ -212,4 +227,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.16 2006/01/05 21:40:37 layer Exp $
+$Id: ChangeLog,v 1.17 2007/01/22 19:42:45 layer Exp $
