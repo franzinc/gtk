@@ -1,3 +1,8 @@
+2007-08-20  Ken Cheetham  <cheetham@gemini>
+
+	* bug17351 Declare pointer return values as :nat rather than
+	  :int, to work on 64-bit platforms
+	
 *******************************************************************************
 join from acl8 to trunk, changes from
 	2006-05-22  Kevin Layer  <layer@gemini>
@@ -227,4 +232,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.17 2007/01/22 19:42:45 layer Exp $
+$Id: ChangeLog,v 1.17.24.1 2007/08/21 02:38:35 cheetham Exp $
