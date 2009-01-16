@@ -1,3 +1,24 @@
+2009-01-15  Ken Cheetham  <cheetham@gemini>
+
+*** Summary ***
+
+bug18243 - Remove the auto-generated foreign type definition of
+"boolean" that inadvertently wiped out the CL boolean type.
+
+*** Details ***
+
+RCS file: /cvs/gtk/gtk20.cl,v
++ ;; For bug17351 (v1) and bug18243 (v2).
++ (sys:defpatch "gtk20"
++   1
++   "v1: Fix 64-bit Linux crashes due to declaring pointer return values as :int.
++    v2: Remove the auto-generated redefinition of boolean as a foreign :int."
++   :type :system)
++ ;;; chee   15jan09 bug18243 remove this auto-generated definition that
++ ;;;        inadvertently wiped out the CL boolean type
++ #+removed
+  (def-foreign-type boolean :int)
+
 2007-08-20  Ken Cheetham  <cheetham@gemini>
 
 	* bug17351 Declare pointer return values as :nat rather than
@@ -232,4 +253,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.17.24.1 2007/08/21 02:38:35 cheetham Exp $
+$Id: ChangeLog,v 1.17.24.2 2009/01/16 05:52:34 cheetham Exp $
