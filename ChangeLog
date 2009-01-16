@@ -1,3 +1,29 @@
+2009-01-15    Ken Cheetham   <cheetham@gemini>
+	
+*** Summary ***
+
+Merged the two 8.1 patches to the gtk ffi module into my trunk
+checkout so that the fixes are in my 8.2 linux cg/ide that I build on
+a trunk checkout of gtk, without waiting for a join.
+
+bug17351 - Use :nat rather than :int for pointer return values, to
+work on 64-bit platforms.
+
+bug18243 - Don't define cl:boolean as a numeric foreign type.
+
+*** Details ***
+
+RCS file: /cvs/gtk/gtk20.cl,v
++ ;;; chee   15jan09 bug18243 remove this auto-generated definition that
++ ;;;        inadvertently wiped out the CL boolean type
++ #+removed
+  (def-foreign-type boolean :int)
++ ;;; chee   20aug07 bug17351 use :nat rather than :int for pointer
++ ;;;        return values, to work on 64-bit platforms
+    (def-fwrapper bind-c-function-char*-wrapper (&rest args)
+! 			(setf (cadr nlist) ':int)))
+! 			(setf (cadr nlist) :nat))) ;; bug17351
+
 *******************************************************************************
 join from acl8 to trunk, changes from
 	2006-05-22  Kevin Layer  <layer@gemini>
@@ -227,4 +253,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.17 2007/01/22 19:42:45 layer Exp $
+$Id: ChangeLog,v 1.18 2009/01/16 07:14:18 cheetham Exp $
