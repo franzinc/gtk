@@ -16,7 +16,7 @@
 ;; Commercial Software developed at private expense as specified in 
 ;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
 
-;; $Id: loadgtk20.cl,v 1.9 2007/01/22 19:42:45 layer Exp $
+;; $Id: loadgtk20.cl,v 1.10 2009/04/17 17:44:43 duane Exp $
 
 ;; Patched for bug12382
 
@@ -53,7 +53,7 @@
 
 (labels
     ((do-load (*default-pathname-defaults*)
-       (do ((gtk-lib.so #p"gtk:gtk20-lib.so")
+       (do ((gtk-lib.so (parse-namestring (format nil "gtk:gtk20-lib.~a" sys::*dll-type*)))
 	    (gtk-lib.so-loaded nil))
 	   (gtk-lib.so-loaded)		; end restart loop if success
 	 (unless (probe-file gtk-lib.so)
@@ -98,7 +98,8 @@ env LD_LIBRARY_PATH=~a cc ~a -o ~a ~
 sed 's/-rdynamic//'`"
 			   (sys:getenv "LD_LIBRARY_PATH")
 			   #+(or sparc aix) "-G"
-			   #-(or sparc aix) "-shared"
+			   #+macosx "-bundle -flat_namespace"
+			   #-(or sparc aix macosx) "-shared"
 			   (namestring gtk-lib.so)
 			   pkg-config-path
 			   config-prog

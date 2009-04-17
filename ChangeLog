@@ -1,3 +1,7 @@
+2009-04-17  Duane Rettig  <duane@franz.com>
+
+	* loadgtk20.cl: Fix library building for MacOSX
+
 2009-01-15    Ken Cheetham   <cheetham@gemini>
 	
 *** Summary ***
@@ -253,4 +257,4 @@ b>
   Initial checkin.  Command being used:
   cvs import -m "Initial acl gtk interface checkin" gtk fi init
 
-$Id: ChangeLog,v 1.18 2009/01/16 07:14:18 cheetham Exp $
+$Id: ChangeLog,v 1.19 2009/04/17 17:44:43 duane Exp $
