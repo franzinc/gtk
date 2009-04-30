@@ -1,3 +1,7 @@
+2009-04-30  Duane Rettig  <duanerettig@duane-rettigs-macbook-pro.local>
+
+	*  loadgtk20.cl: Fix library build for MacOSX to use Quartz library
+
 2009-04-17  Duane Rettig  <duane@franz.com>
 
 	* loadgtk20.cl: Fix library building for MacOSX

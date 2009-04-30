@@ -82,7 +82,8 @@ including the gtk library path.~:@>~%"))))
 
      (build-gtk-lib.so (gtk-lib.so
 			&aux (config-prog "pkg-config")
-			     (config-arg "gtk+-2.0"))
+			     (config-arg #-macosx "gtk+-2.0"
+					 #+macosx "gtk+-quartz-2.0"))
        ;; For building gtk-lib.so:
        ;; -- The pkg-config (or gtk-config) must be available.
        ;; -- gtk libs must be in LD_LIBRARY_PATH during ld.
