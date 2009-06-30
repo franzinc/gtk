@@ -1,1 +1,3 @@
-.git-branch-name
+/*.tmp
+/*.out
+/gtk-dist/
