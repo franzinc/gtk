@@ -1,3 +1,7 @@
+2009-07-14  Kevin Layer  <layer@gemini.franz.com>
+
+	*  loadgtk20.cl: don't use Quartz on Mac OS X
+
 2009-04-30  Duane Rettig  <duanerettig@duane-rettigs-macbook-pro.local>
 
 	*  loadgtk20.cl: Fix library build for MacOSX to use Quartz library
