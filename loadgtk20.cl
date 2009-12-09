@@ -93,10 +93,11 @@ including the gtk library path.~:@>~%"))))
 	    (cmd nil))
 	   (gtk-lib.so-built)		; end restart loop if success
 	 (setq cmd (format nil "~
-env LD_LIBRARY_PATH=~a cc ~a -o ~a ~
+env LD_LIBRARY_PATH=~a cc~@[ ~a~] ~a -o ~a ~
 `\"~a~a\" --libs ~a | ~
 sed 's/-rdynamic//'`"
 			   (sys:getenv "LD_LIBRARY_PATH")
+			   #+(and 64bit macosx) "-m64"
 			   #+(or sparc aix) "-G"
 			   #+macosx "-bundle -flat_namespace"
 			   #-(or sparc aix macosx) "-shared"
