@@ -40939,7 +40939,9 @@ definition conflicts with another definition whose name differs only by case."
 (ff:bind-c-constant SHRT_MIN -32768)     ;;-0x8000  0xffff8000
 
 ;#define TRUE (!FALSE)
-(ff:bind-c-constant TRUE (lognot FALSE))
+;;(ff:bind-c-constant TRUE (lognot FALSE))
+;; 7/26/10: Changed TRUE to 1 (actual gtk value) from -1 (AKW)
+(ff:bind-c-constant TRUE 1)
 ;; #define UCHAR_MAX 255 
 (ff:bind-c-constant UCHAR_MAX 255)     ;; 0xff  
 ;; #define UINT_MAX 4294967295U 
