@@ -51,26 +51,31 @@
 (when (eq *current-case-mode* :case-insensitive-upper)
   (setf (readtable-case (named-readtable :gtk)) :invert))
 
+
 (labels
-    ((do-load (*default-pathname-defaults*)
-       (do ((gtk-lib.so (parse-namestring (format nil "gtk:gtk20-lib.~a" sys::*dll-type*)))
-	    (gtk-lib.so-loaded nil))
+    ((do-load (*default-pathname-defaults* loadable-sofiles)
+       (do ((gtk-lib.so-loaded nil))
 	   (gtk-lib.so-loaded)		; end restart loop if success
-	 (unless (probe-file gtk-lib.so)
-	   (build-gtk-lib.so gtk-lib.so))
-	 (restart-case			; rebuild gtk-lib.so if necessary
-	     (handler-bind ((error #'(lambda (c)
-				       (declare (ignore c))
-				       (format t "~&~
+         (loop for ((gtk-lib.so rebuild-function attempt-loading-p) . more-options-p) on loadable-sofiles
+               until gtk-lib.so-loaded
+               do (when (and (probe-file gtk-lib.so)
+                             (funcall attempt-loading-p))
+                    (if more-options-p
+                        (ignore-errors (progn (load gtk-lib.so)
+                                              (setf gtk-lib.so-loaded t)))
+                        (restart-case ; rebuild gtk-lib.so if necessary
+                            (handler-bind ((error #'(lambda (c)
+                                                      (declare (ignore c))
+                                                      (format t "~&~
 ~@<~@;Possible Error Cause: ~:I~
 Lisp needs to be started with the LD_LIBRARY_PATH environment variable ~
 including the gtk library path.~:@>~%"))))
-	       (load gtk-lib.so)
-	       (setq gtk-lib.so-loaded t))
-	   (r-build-gtk-lib.so ()
-	       :report (lambda (stream)
-			 (format stream "Build ~a" (namestring gtk-lib.so)))
-	     (build-gtk-lib.so gtk-lib.so))))
+                              (load gtk-lib.so)
+                              (setq gtk-lib.so-loaded t))
+                          (r-build-gtk-lib.so ()
+                            :report (lambda (stream)
+                                      (format stream "Build ~a" (namestring gtk-lib.so)))
+                            (funcall rebuild-function gtk-lib.so)))))))
 
        (load (compile-file-if-needed "cdbind.cl")) ; From cbind
        ;; bug12382
@@ -79,7 +84,22 @@ including the gtk library path.~:@>~%"))))
        (let ((comp::*fasl-hash-size* 500000))
 	 (load (compile-file-if-needed #+ignore identity "gtk20.cl")))
        (load (compile-file-if-needed "eh.cl")))
-
+     #+macosx
+     (build-gtk-lib-using-framework (gtk-lib.so)
+       (let ((cmd (format nil "~
+cc~@[~a~] -bundle -flat_namespace -o ~a -framework Gtk"
+                          (or #-64bit " -m32" " -m64")
+                          (namestring (translate-logical-pathname gtk-lib.so)))))
+         (format t "~&Command:~% ~s~%" cmd)
+         (restart-case
+             (if* (zerop (shell cmd))
+                  then (setq gtk-lib.so-built t)
+                  else (error "Build failed."))
+           (r-build-gtk-lib.so-oldfashioned
+               :report (lambda (stream)
+                         (format stream "Build ~a using GTK in /opt/local" (namestring gtk-lib.so)))
+               (build-gtk-lib.so gtk-lib.so)))))
+     
      (build-gtk-lib.so (gtk-lib.so
 			&aux (config-prog "pkg-config")
 			     (config-arg "gtk+-2.0"))
@@ -134,16 +154,34 @@ sed 's/-rdynamic//'`"
 
      (read-new-value ()
        (format t "Enter pathname namestring: ")
-       (multiple-value-list (eval (read-line)))))
+       (multiple-value-list (eval (read-line))))
 
-  (let ((*record-source-file-info* nil)
-	(*load-source-file-info* nil))
+     (attempt-loading-framework-gtk-lib-p ()
+       (probe-file "/Library/Frameworks/Gtk.framework/Gtk"))
+     
+     (rebuild-sofiles-if-missing (*default-pathname-defaults*)
+       (let ((sofiles-to-rebuild `(#+macosx (,(parse-namestring (format nil "gtk:gtk20-fw.~a" sys::*dll-type*))
+                                              ,#'build-gtk-lib-using-framework
+                                              ,#'attempt-loading-framework-gtk-lib-p)
+                                            (,(parse-namestring (format nil "gtk:gtk20-lib.~a" sys::*dll-type*))
+                                              ,#'build-gtk-lib.so
+                                              ,(constantly t)))))
+         (dolist (sofile sofiles-to-rebuild)
+           (unless (probe-file (car sofile))
+             (funcall (cadr sofile) (car sofile))))
+         sofiles-to-rebuild)))
+
+  (let* ((*record-source-file-info* nil)
+         (*load-source-file-info* nil)
+         (build-dir (make-pathname :name nil :type nil :defaults (translate-logical-pathname *load-pathname*)))
+         (loadable-sofiles (rebuild-sofiles-if-missing build-dir)))
+    
     #-use-in-case-mode
     (with-named-readtable (:gtk)
       ;; bug14934
-      (do-load (translate-logical-pathname *load-pathname*)))
+      (do-load build-dir loadable-sofiles))
     #+use-in-case-mode
-    (do-load (translate-logical-pathname *load-pathname*))))
+    (do-load build-dir loadable-sofiles)))
 
 #+remove				; bug15263
 (with-named-readtable (:gtk)
