@@ -8,12 +8,12 @@ lisp = ../src/lisp -I dcl
 all:	clean
 	echo '(load "makedist.cl")' >> build.tmp
 	echo '(exit 0)' >> build.tmp
-	sh $(runlisp_sh) -f build.tmp $(lisp) -qq
+	bash $(runlisp_sh) -f build.tmp $(lisp) -qq
 
 build:	clean
 	echo '(load "loadgtk20.cl")' >> build.tmp
 	echo '(exit 0)' >> build.tmp
-	sh $(runlisp_sh) -f build.tmp $(lisp) -qq
+	bash $(runlisp_sh) -f build.tmp $(lisp) -qq
 
 clean: FORCE
 	-find . -name '*.fasl' -print | xargs rm -f
