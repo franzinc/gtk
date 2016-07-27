@@ -1,22 +1,5 @@
 ;;
-;; copyright (c) 1996-2000 Franz Inc, Berkeley, CA  - All rights reserved.
-;; copyright (c) 2000-2004 Franz Inc, Oakland, CA - All rights reserved.
-;;
-;; The software, data and information contained herein are proprietary
-;; to, and comprise valuable trade secrets of, Franz, Inc.  They are
-;; given in confidence by Franz, Inc. pursuant to a written license
-;; agreement, and may be stored and used only in accordance with the terms
-;; of such license.
-;;
-;; Restricted Rights Legend
-;; ------------------------
-;; Use, duplication, and disclosure of the software, data and information
-;; contained herein by any agency, department or entity of the U.S.
-;; Government are subject to restrictions of Restricted Rights for
-;; Commercial Software developed at private expense as specified in 
-;; DOD FAR Supplement 52.227-7013 (c) (1) (ii), as applicable.
-
-;; $Id: eh.cl,v 1.5 2005/08/03 05:07:56 layer Exp $
+;; See the file LICENSE for the full license governing this code.
 
 ;; Extensions to Lisp gtk+ interface which allow multi-processing integration.
 ;;

@@ -2,7 +2,6 @@
 /* 
 
 ;; Allegro CL Lisp-to-C Binder Version 1.6.3(1.6.3).
-;; copyright (c) 1996-1998 Franz Inc, Berkeley, CA
 
 C Compiler switches:
   -I/net/fritter/home/cox/gtk2/fritter/i/include/gtk-2.0 -I/net/fritter/home/cox/gtk2/fritter/i/lib/gtk-2.0/include -I/net/fritter/home/cox/gtk2/fritter/i/include/atk-1.0 -I/net/fritter/home/cox/gtk2/fritter/i/include/pango-1.0 -I/usr/X11R6/include -I/net/fritter/home/cox/gtk2/fritter/i/include/glib-2.0 -I/net/fritter/home/cox/gtk2/fritter/i/lib/glib-2.0/include   
