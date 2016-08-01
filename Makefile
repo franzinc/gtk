@@ -1,4 +1,3 @@
-# $Id: Makefile,v 1.5 2005/09/28 21:45:13 layer Exp $
 
 SHELL = sh
 
