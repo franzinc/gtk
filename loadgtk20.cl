@@ -143,12 +143,17 @@ sed 's/-rdynamic//'`"
        (probe-file "/Library/Frameworks/Gtk.framework/Gtk"))
      
      (rebuild-sofiles-if-missing (*default-pathname-defaults*)
-       (let ((sofiles-to-rebuild `(#+macosx (,(parse-namestring (format nil "gtk:gtk20-fw.~a" sys::*dll-type*))
-                                              ,#'build-gtk-lib-using-framework
-                                              ,#'attempt-loading-framework-gtk-lib-p)
-                                            (,(parse-namestring (format nil "gtk:gtk20-lib.~a" sys::*dll-type*))
-                                              ,#'build-gtk-lib.so
-                                              ,(constantly t)))))
+       (let ((sofiles-to-rebuild
+	      `(#+macosx
+		(,(parse-namestring
+		   (format nil "gtk:gtk20-fw.~a" sys::*dll-type*))
+		 ,#'build-gtk-lib-using-framework
+		 ,#'attempt-loading-framework-gtk-lib-p)
+		#-macosx
+		(,(parse-namestring
+		   (format nil "gtk:gtk20-lib.~a" sys::*dll-type*))
+		 ,#'build-gtk-lib.so
+		 ,(constantly t)))))
          (dolist (sofile sofiles-to-rebuild)
            (unless (probe-file (car sofile))
              (funcall (cadr sofile) (car sofile))))
