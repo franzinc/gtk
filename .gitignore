@@ -1,3 +1,5 @@
-/*.tmp
-/*.out
+*.tmp
+*.out
+*.so
+*.dylib
 /gtk-dist/
